@@ -1,148 +1,184 @@
-import { FormEvent, useLayoutEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { StatusModal } from '../components/StatusModal';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
-export type AuthMode = 'login' | 'register' | 'forgot';
+export const AuthPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const initialMode = searchParams.get('mode') === 'register' ? 'register' : 'login';
+  const [mode, setMode] = useState<'login' | 'register'>(initialMode);
 
-type AuthPageProps = {
-  mode: AuthMode;
-  onModeChange: (mode: AuthMode | null) => void;
-  onAuthenticated?: () => void;
-};
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-export function AuthPage({ mode, onModeChange, onAuthenticated }: AuthPageProps) {
-  const [statusModal, setStatusModal] = useState<'loading' | 'not-found' | null>(null);
+  const { login, register, loginDemo, user } = useAuth();
+  const navigate = useNavigate();
 
-  useLayoutEffect(() => {
-    const context = gsap.context(() => {
-      gsap.from('.auth-brand, .auth-card > *, .auth-note', {
-        y: 22,
-        opacity: 0,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: 'power3.out',
-      });
-      gsap.from('.auth-aside > *', {
-        x: 24,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        delay: 0.15,
-        ease: 'power3.out',
-      });
-    });
-    return () => context.revert();
-  }, [mode]);
-
-  const isRegister = mode === 'register';
-  const isForgot = mode === 'forgot';
-
-  const title = isRegister
-    ? 'BUAT AKUN KONTOR.'
-    : isForgot
-    ? 'ATUR ULANG AKSES.'
-    : 'MASUK KE KONTOR.';
-
-  const description = isRegister
-    ? 'Mulai pencatatan aset dengan struktur yang presisi.'
-    : isForgot
-    ? 'Masukkan email untuk menerima tautan pengaturan ulang kata sandi.'
-    : 'Akses ledger dan alokasi modal Anda.';
-
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    if (!isForgot) {
-      onAuthenticated?.();
-    } else {
-      setStatusModal('loading');
-      window.setTimeout(() => setStatusModal('not-found'), 2200);
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
     }
+  }, [user, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg(null);
+    setIsSubmitting(true);
+
+    try {
+      if (mode === 'register') {
+        const res = await register(email, password, name || 'Pengguna FATrack');
+        if (res.error) {
+          setErrorMsg(res.error);
+        } else {
+          navigate('/onboarding');
+        }
+      } else {
+        const res = await login(email, password);
+        if (res.error) {
+          setErrorMsg(res.error);
+        } else {
+          navigate('/dashboard');
+        }
+      }
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Terjadi kesalahan sistem.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDemo = () => {
+    loginDemo();
+    navigate('/dashboard');
   };
 
   return (
     <main className="auth-page">
       <section className="auth-panel">
-        <button className="auth-brand" type="button" onClick={() => onModeChange(null)}>
-          <span className="avatar">K</span>
-          <b>KONTOR</b>
+        <button className="auth-brand" type="button" onClick={() => navigate('/')}>
+          <span className="avatar">FA</span>
+          <b>FATRACK</b>
           <i>/</i>
-          <span>CAPITAL TRACKER</span>
+          <span>PERSONAL FINANCE ADVISOR</span>
         </button>
 
         <div className="auth-card">
           <small className="accent">
-            {isRegister ? 'REGISTRASI AKUN' : isForgot ? 'PEMULIHAN AKSES' : 'IDENTIFIKASI PENGGUNA'}
+            {mode === 'register' ? '01 / REGISTRASI AKUN' : '02 / IDENTIFIKASI PENGGUNA'}
           </small>
-          <h1>{title}</h1>
-          <p>{description}</p>
+          <h1>{mode === 'register' ? 'BUAT AKUN FATRACK.' : 'MASUK KE FATRACK.'}</h1>
+          <p>
+            {mode === 'register'
+              ? 'Mulai navigasi keuangan Anda dengan formula dan rekomendasi konkret.'
+              : 'Akses dashboard finansial dan riwayat pengeluaran harian Anda.'}
+          </p>
+
+          {errorMsg && (
+            <div className="auth-error-box">
+              ⚠ {errorMsg}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
-            <label>
-              ALAMAT EMAIL
-              <input type="email" autoComplete="email" placeholder="nama@perusahaan.id" required />
-            </label>
-
-            {isRegister && (
+            {mode === 'register' && (
               <label>
                 NAMA LENGKAP
-                <input type="text" autoComplete="name" placeholder="Nama Anda" required />
-              </label>
-            )}
-
-            {!isForgot && (
-              <label>
-                KATA SANDI
                 <input
-                  type="password"
-                  autoComplete={isRegister ? 'new-password' : 'current-password'}
-                  placeholder="Minimal 8 karakter"
-                  minLength={8}
+                  type="text"
+                  placeholder="Misal: Andi Pratama"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
               </label>
             )}
 
-            <button className="pill dark" type="submit">
-              {isRegister ? 'BUAT AKUN' : isForgot ? 'KIRIM TAUTAN PEMULIHAN' : 'MASUK KE DASHBOARD'}
+            <label>
+              ALAMAT EMAIL
+              <input
+                type="email"
+                placeholder="nama@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+
+            <label>
+              KATA SANDI
+              <input
+                type="password"
+                placeholder="Minimal 6 karakter"
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+
+            <button className="pill dark" type="submit" disabled={isSubmitting}>
+              {isSubmitting
+                ? 'MEMPROSES...'
+                : mode === 'register'
+                ? 'DAFTAR & SETUP PROFIL →'
+                : 'MASUK KE DASHBOARD →'}
             </button>
           </form>
 
-          {!isForgot && (
-            <button className="text-link" type="button" onClick={() => onModeChange('forgot')}>
-              LUPA KATA SANDI?
-            </button>
-          )}
-
-          <p className="auth-switch">
-            {isRegister ? 'Sudah memiliki akun?' : isForgot ? 'Ingat kata sandi?' : 'Belum memiliki akun?'}{' '}
+          <div className="auth-demo-divider">
             <button
               type="button"
-              onClick={() => onModeChange(isRegister || isForgot ? 'login' : 'register')}
+              className="pill dark auth-demo-btn"
+              onClick={handleDemo}
             >
-              {isRegister ? 'MASUK' : isForgot ? 'KEMBALI KE MASUK' : 'DAFTAR SEKARANG'}
+              COBA INSTAN DENGAN DEMO MODE →
+            </button>
+          </div>
+
+          <p className="auth-switch">
+            {mode === 'register' ? 'Sudah memiliki akun?' : 'Belum memiliki akun?'}{' '}
+            <button
+              type="button"
+              onClick={() => {
+                setMode(mode === 'register' ? 'login' : 'register');
+                setErrorMsg(null);
+              }}
+            >
+              {mode === 'register' ? 'MASUK' : 'DAFTAR SEKARANG'}
             </button>
           </p>
         </div>
 
-        <small className="auth-note">DATA LOKAL TERENKRIPSI / PROTOKOL PRIVASI KONTOR</small>
+        <small className="auth-note">
+          DATA FINANSIAL TERLINDUNGI SUPABASE RLS / SISTEM ENKRIPSI PROTOKOL
+        </small>
       </section>
 
-      {statusModal && (
-        <StatusModal kind={statusModal} onClose={() => setStatusModal(null)} />
-      )}
-
       <aside className="auth-aside">
-        <small>PROTOKOL AKURASI TINGGI / 2025.1</small>
-        <h2>KEJELASAN PENUH UNTUK SETIAP KEPUTUSAN MODAL.</h2>
+        <small>SISTEM PENASIHAT KEUANGAN ANAK MUDA</small>
+        <h2>
+          STRUKTUR NYATA
+          <br />
+          UNTUK MASA DEPAN
+          <br />
+          YANG PASTI.
+        </h2>
         <div>
-          <b>01 / LEDGER TERSTRUKTUR</b>
-          <p>Catat arus keuangan tanpa kehilangan konteks.</p>
+          <b>01 / BATAS JAJAN HARIAN</b>
+          <p>Ketahui pasti nominal aman yang bisa Anda belanjakan setiap hari.</p>
         </div>
         <div>
-          <b>02 / PRIVASI LOKAL</b>
-          <p>Data Anda tetap berada dalam kendali Anda.</p>
+          <b>02 / STANDAR SEWA KOST</b>
+          <p>Cegah overspend pada sewa tempat tinggal di atas batas 25% gaji.</p>
+        </div>
+        <div>
+          <b>03 / PAKET MINIMARKET</b>
+          <p>Katalog estimasi belanja bahan pokok untuk menjaga pengeluaran makan.</p>
         </div>
       </aside>
     </main>
   );
-}
+};

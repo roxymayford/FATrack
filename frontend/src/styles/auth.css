@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Auth Page (Login / Register)
+   ========================================================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 58%) minmax(360px, 42%);
+  background: var(--paper);
+}
+
+.auth-panel {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--line);
+  min-height: 100vh;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  width: max-content;
+}
+
+.auth-brand i,
+.auth-brand span:last-child {
+  color: #777;
+}
+
+.auth-card {
+  width: min(100%, 460px);
+  margin: 72px auto;
+}
+
+.auth-card h1 {
+  font-size: clamp(42px, 5vw, 64px);
+  margin: 14px 0;
+}
+
+.auth-card > p {
+  font-size: 16px;
+  margin: 0 0 30px;
+}
+
+.auth-card form {
+  display: grid;
+  gap: 18px;
+}
+
+.auth-card label {
+  display: grid;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.auth-card input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #fff;
+  padding: 15px;
+  font: inherit;
+}
+
+.auth-card input:focus {
+  outline: 3px solid rgba(255, 77, 37, .35);
+  outline-offset: 2px;
+}
+
+.auth-card .pill {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.auth-switch button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--orange);
+  font: 700 11px inherit;
+  letter-spacing: .08em;
+  cursor: pointer;
+}
+
+.auth-switch {
+  font-size: 13px !important;
+  margin-top: 28px !important;
+}
+
+.auth-note {
+  color: #777;
+}
+
+.auth-demo-divider {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+}
+
+.auth-demo-btn {
+  width: 100%;
+  background: transparent;
+  color: #111;
+  border: 1px solid #111;
+}
+
+.auth-demo-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+.auth-aside {
+  background: var(--orange);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.auth-aside h2 {
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: .96;
+  letter-spacing: -.05em;
+  margin: 0 0 30px;
+  max-width: 620px;
+}
+
+.auth-aside b {
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.auth-aside p {
+  margin: 6px 0;
+  color: #111;
+  max-width: 340px;
+}

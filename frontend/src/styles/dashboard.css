@@ -1,0 +1,505 @@
+/* ==========================================================================
+   Dashboard Page & Widgets
+   ========================================================================== */
+
+/* Legacy Dashboard & Tracker */
+.dashboard-page {
+  min-height: 100vh;
+  background: var(--paper);
+  padding-bottom: 60px;
+}
+
+.dashboard-header {
+  height: 64px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.dashboard-header > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.dashboard-logout {
+  color: var(--orange);
+}
+
+.dashboard-intro {
+  padding: 64px 40px 40px;
+  border-bottom: 1px solid var(--line);
+  max-width: 900px;
+}
+
+.dashboard-intro h1 {
+  font-size: clamp(52px, 8vw, 100px);
+  margin: 16px 0;
+}
+
+.dashboard-intro p {
+  font-size: 18px;
+  max-width: 520px;
+}
+
+.tracker-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+.tracker-form {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  border: 1px solid var(--line);
+  padding: 24px;
+  background: #fff;
+}
+
+.tracker-form > small {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 14px;
+}
+
+.tracker-form label {
+  display: grid;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.tracker-form input,
+.tracker-form select,
+.ledger-head select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font: inherit;
+}
+
+.tracker-form input:focus,
+.tracker-form select:focus,
+.ledger-head select:focus {
+  outline: 3px solid rgba(255, 77, 37, .3);
+  outline-offset: 2px;
+}
+
+.ledger {
+  min-width: 0;
+}
+
+.ledger-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.ledger-head h2 {
+  font-size: 42px;
+  letter-spacing: -.05em;
+  margin: 5px 0 0;
+}
+
+.ledger-head select {
+  width: auto;
+  min-width: 140px;
+}
+
+.empty-ledger {
+  padding: 42px 0;
+  border-bottom: 1px solid #bbb;
+}
+
+.ledger-list {
+  border-top: 1px solid var(--line);
+}
+
+.ledger-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid #bbb;
+}
+
+.ledger-row b,
+.ledger-row small {
+  display: block;
+}
+
+.ledger-row small {
+  color: #777;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.ledger-row strong {
+  white-space: nowrap;
+}
+
+.ledger-row .income {
+  color: #008547;
+}
+
+.ledger-row .expense {
+  color: var(--orange);
+}
+
+.ledger-row button {
+  margin-left: 12px;
+  border: 0;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: #111;
+}
+
+/* Dashboard Hero Strip */
+.dashboard-hero-strip {
+  padding: 30px 40px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.strip-title-box h2 {
+  font-size: 28px;
+  margin: 4px 0;
+  letter-spacing: -0.04em;
+}
+
+.strip-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* KPI Grid */
+.dashboard-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.kpi-cell {
+  padding: 24px 30px;
+  border-right: 1px solid var(--line);
+}
+
+.kpi-cell:last-child {
+  border-right: 0;
+}
+
+.kpi-cell small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.kpi-cell strong {
+  display: block;
+  font-size: 26px;
+  margin: 6px 0;
+  letter-spacing: -0.03em;
+}
+
+.kpi-cell span {
+  font-size: 11px;
+  color: #777;
+}
+
+/* Dashboard 2-Column Grid */
+.dashboard-columns-grid {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  padding: 40px;
+  gap: 40px;
+}
+
+.dashboard-left-col,
+.dashboard-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Daily Limit Widget */
+.daily-limit-widget {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+
+.widget-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.widget-top h4 {
+  font-size: 20px;
+  margin: 4px 0 0;
+  letter-spacing: -0.03em;
+}
+
+.daily-amount-display {
+  border: 2px solid var(--orange);
+  padding: 20px;
+  background: var(--paper);
+  margin-bottom: 20px;
+}
+
+.unit-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.limit-amount {
+  display: block;
+  font-size: 38px;
+  letter-spacing: -0.04em;
+  margin: 8px 0;
+}
+
+.formula-hint {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #777;
+}
+
+.daily-progress-section {
+  margin-bottom: 20px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.swiss-progress-bar {
+  height: 12px;
+  border: 1px solid var(--line);
+  background: #efece6;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.green-fill {
+  background: #008547;
+}
+
+.orange-fill {
+  background: var(--orange);
+}
+
+.red-fill {
+  background: #c90000;
+}
+
+.cycle-metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+}
+
+.cycle-metadata-grid small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.cycle-metadata-grid b {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Budget Gauge */
+.budget-gauge-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gauge-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+
+.gauge-item-header b {
+  display: block;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.gauge-item-header strong {
+  font-size: 20px;
+}
+
+.swiss-gauge-bar {
+  height: 10px;
+  border: 1px solid var(--line);
+  background: #efece6;
+  position: relative;
+}
+
+.gauge-fill {
+  height: 100%;
+}
+
+.gauge-black {
+  background: #111;
+}
+
+.gauge-orange {
+  background: var(--orange);
+}
+
+.gauge-red {
+  background: #c90000;
+}
+
+.gauge-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #777;
+  margin-top: 6px;
+}
+
+/* Health Score Card */
+.health-score-widget {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+
+.health-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.score-main-display {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid var(--line);
+  padding: 16px;
+  background: var(--paper);
+  margin-bottom: 18px;
+}
+
+.score-number-box {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.grade-badge {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  padding: 8px 14px;
+}
+
+.score-val-wrap {
+  display: flex;
+  align-items: baseline;
+}
+
+.score-number {
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.score-max {
+  font-size: 14px;
+  color: #777;
+}
+
+.health-breakdown-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border-left: 1px solid #ddd;
+  padding-left: 16px;
+}
+
+.metric-cell small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.metric-cell b {
+  display: block;
+  font-size: 14px;
+  margin: 3px 0;
+}
+
+.metric-cell span {
+  font-size: 10px;
+  color: #777;
+}
+
+.health-advice-box {
+  font-size: 12px;
+  border-top: 1px solid #ddd;
+  padding-top: 14px;
+}
+
+.health-advice-box b {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.health-advice-box p {
+  margin: 0;
+  color: #111;
+  line-height: 1.4;
+}

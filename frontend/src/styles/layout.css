@@ -1,0 +1,282 @@
+/* ==========================================================================
+   App Shell & Layout
+   ========================================================================== */
+
+/* Topbar & Navigation (Legacy & FATrack) */
+.topbar {
+  height: 64px;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand i {
+  color: #888;
+}
+
+.brand span:last-child {
+  color: #888;
+}
+
+.avatar {
+  border: 1px solid #111;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 25px;
+}
+
+.topbar nav a {
+  padding: 5px;
+}
+
+.topbar nav .active {
+  background: #111;
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* FATrack App Shell & Navigation */
+.fatrack-app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.fatrack-topbar {
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.brand-divider {
+  color: #888;
+  font-style: normal;
+}
+
+.brand-sub {
+  color: #888;
+  font-size: 11px;
+}
+
+.fatrack-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.fatrack-nav .nav-item {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.fatrack-nav .nav-item:hover {
+  background: var(--paper);
+  border-color: #ccc;
+}
+
+.fatrack-nav .nav-item.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.user-greeting b {
+  color: #111;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  color: var(--orange);
+}
+
+.logout-btn:hover {
+  background: var(--orange);
+  color: #fff;
+}
+
+.fatrack-main-content {
+  flex: 1;
+}
+
+/* Mobile Bottom Navigation Bar */
+.fatrack-mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 100;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-decoration: none;
+  color: #777;
+  border-right: 1px solid #eee;
+  transition: all 0.15s ease;
+}
+
+.bottom-nav-item:last-child {
+  border-right: 0;
+}
+
+.bottom-nav-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.bottom-nav-num {
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--orange);
+}
+
+.bottom-nav-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.bottom-nav-item.active {
+  background: #111;
+  color: #fff;
+}
+
+.bottom-nav-item.active .bottom-nav-num,
+.bottom-nav-item.active .bottom-nav-label {
+  color: #fff;
+}
+
+/* Page Common Header Strip */
+.page-head-strip {
+  padding: 36px 40px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.page-head-strip h2 {
+  font-size: 32px;
+  letter-spacing: -0.04em;
+  margin: 6px 0;
+}
+
+.page-head-strip p {
+  font-size: 14px;
+  margin: 0;
+  max-width: 680px;
+}
+
+/* Site & FATrack Footers */
+.site-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid #111;
+}
+
+.site-footer > div {
+  padding: 25px;
+  border-right: 1px solid #111;
+}
+
+.site-footer p {
+  font-size: 13px;
+  color: #111;
+}
+
+.fatrack-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  background: #fff;
+  margin-top: 40px;
+}
+
+.footer-col {
+  padding: 24px 30px;
+  border-right: 1px solid var(--line);
+}
+
+.footer-col:last-child {
+  border-right: 0;
+}
+
+.footer-col small {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.footer-col p {
+  font-size: 12px;
+  margin: 6px 0 0;
+  color: #111;
+}

@@ -1,0 +1,84 @@
+:root {
+  font-family: 'Hanken Grotesk', sans-serif;
+  color: #111;
+  background: #efece6;
+  --paper: #fcf9f3;
+  --orange: #ff4d25;
+  --line: #111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #efece6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.5;
+  color: #777;
+}
+
+h1 {
+  max-width: 850px;
+  font-size: clamp(44px, 6.5vw, 84px);
+  line-height: .99;
+  letter-spacing: -.05em;
+  margin: 16px 0;
+  font-weight: 800;
+}
+
+small {
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+/* Utility Colors & Text */
+.green {
+  color: #008547 !important;
+}
+
+.green-text {
+  color: #008547 !important;
+}
+
+.red-text {
+  color: var(--orange) !important;
+}
+
+.muted-text {
+  color: #777 !important;
+}
+
+.bold-excess {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.accent {
+  color: var(--orange);
+}
+
+.red {
+  color: var(--orange);
+}
+
+/* Visibility Utilities */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}

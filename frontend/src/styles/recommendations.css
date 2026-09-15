@@ -1,0 +1,345 @@
+/* ==========================================================================
+   Lifestyle Recommendations (Kost & Meal Plans)
+   ========================================================================== */
+
+.recommendations-page-container {
+  padding-bottom: 60px;
+}
+
+.lifestyle-user-summary {
+  display: flex;
+  gap: 24px;
+  border: 1px solid var(--line);
+  padding: 12px 20px;
+  background: var(--paper);
+}
+
+.lifestyle-user-summary small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #777;
+}
+
+.lifestyle-user-summary b {
+  font-size: 15px;
+}
+
+.recommendations-tabs-bar {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  padding: 0 40px;
+}
+
+.rec-tab-btn {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 16px 20px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  color: #777;
+}
+
+.rec-tab-btn.active {
+  border-bottom-color: var(--orange);
+  color: #111;
+}
+
+.kost-recommendations-section,
+.meal-recommendations-section {
+  padding: 40px;
+}
+
+.recommendation-criteria-banner {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 24px 30px;
+  margin-bottom: 30px;
+}
+
+.recommendation-criteria-banner h4 {
+  font-size: 18px;
+  margin: 4px 0 0;
+}
+
+.recommendation-criteria-banner p {
+  margin: 6px 0 0;
+  font-size: 13px;
+}
+
+/* Kost Recommendations Grid */
+.kost-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.kost-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 440px;
+  position: relative;
+}
+
+.kost-card-recommended {
+  border: 2px solid var(--orange);
+  box-shadow: 6px 6px 0 var(--orange);
+}
+
+.recommendation-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+}
+
+.kost-card-head h3 {
+  font-size: 20px;
+  margin: 4px 0;
+  letter-spacing: -0.03em;
+}
+
+.price-tag {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--orange);
+  margin-top: 6px;
+}
+
+.price-tag small {
+  font-size: 11px;
+  color: #777;
+  font-weight: 500;
+}
+
+.kost-desc {
+  font-size: 13px;
+  margin: 14px 0;
+  line-height: 1.4;
+}
+
+.facilities-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.facility-tag {
+  background: var(--paper);
+  border: 1px solid #ddd;
+  font-size: 10px;
+  padding: 4px 8px;
+  font-weight: 600;
+}
+
+.kost-card-foot {
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.kost-card-foot small {
+  display: block;
+  font-size: 9px;
+  color: #777;
+}
+
+.kost-card-foot b {
+  display: block;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.salary-bracket {
+  font-size: 10px;
+  color: #777;
+}
+
+/* Meal Plans & Grocery Basket Section */
+.lifestyle-meal-section {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+
+.meal-section-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+
+.meal-section-nav h3 {
+  font-size: 24px;
+  margin: 4px 0 0;
+}
+
+.meal-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.meal-plan-card {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 24px;
+}
+
+.plan-header h4 {
+  font-size: 18px;
+  margin: 4px 0;
+}
+
+.plan-pricing strong {
+  font-size: 24px;
+  color: #111;
+}
+
+.plan-pricing span {
+  font-size: 11px;
+  color: #777;
+}
+
+.plan-desc {
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.plan-items-table {
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
+.plan-items-table small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.groceries-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tier-selector-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.tier-btn {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.tier-btn.active {
+  background: #111;
+  color: #fff;
+}
+
+.basket-detail-card {
+  border: 1px solid var(--line);
+  padding: 24px;
+  background: var(--paper);
+}
+
+.basket-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+.basket-head h4 {
+  font-size: 20px;
+  margin: 4px 0 0;
+}
+
+.basket-total {
+  text-align: right;
+}
+
+.basket-total small {
+  display: block;
+  font-size: 9px;
+  color: #777;
+}
+
+.basket-total strong {
+  font-size: 22px;
+  color: var(--orange);
+}
+
+.basket-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.basket-item-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name-qty b {
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+.qty-tag {
+  font-size: 10px;
+  background: #efece6;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.item-price {
+  font-size: 13px;
+}

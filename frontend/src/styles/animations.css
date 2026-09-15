@@ -1,0 +1,108 @@
+/* ==========================================================================
+   GSAP ScrollTrigger & Swiss Kinetic Animations
+   ========================================================================== */
+
+/* Top Swiss Scroll Progress Indicator */
+.swiss-scroll-ruler {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.swiss-scroll-ruler-fill {
+  height: 100%;
+  background: var(--orange);
+  width: 0%;
+  transform-origin: left;
+}
+
+.swiss-scroll-tracker-badge {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #111;
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--orange);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 4px 4px 0 var(--orange);
+  transition: opacity 0.2s ease;
+}
+
+.swiss-scroll-tracker-badge .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: radarPulse 1.2s infinite alternate;
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+/* Swiss Kinetic Marquee Ticker */
+.swiss-marquee-section {
+  background: #111;
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid var(--line);
+  border-bottom: 2px solid var(--line);
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.swiss-marquee-track {
+  display: flex;
+  gap: 32px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  will-change: transform;
+}
+
+.swiss-marquee-track span {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.swiss-marquee-track .sep {
+  color: var(--orange);
+}
+
+/* Animated Number Counter Styling */
+.metric strong,
+.terminal-card strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.tier-active-highlight {
+  border-color: var(--orange) !important;
+  box-shadow: 6px 6px 0 var(--orange) !important;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Section reveal borders */
+.reveal-line {
+  height: 2px;
+  background: var(--line);
+  width: 100%;
+  transform-origin: left;
+}

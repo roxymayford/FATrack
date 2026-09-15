@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Onboarding Page Styles
+   ========================================================================== */
+
+.onboarding-page-wrap {
+  min-height: 100vh;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-header {
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.onboarding-container {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.onboarding-intro {
+  margin-bottom: 30px;
+}
+
+.onboarding-intro h1 {
+  font-size: clamp(38px, 5vw, 64px);
+  margin: 8px 0;
+}
+
+.onboarding-intro p {
+  font-size: 16px;
+  max-width: 700px;
+}
+
+.onboarding-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  align-items: start;
+}
+
+.onboarding-inputs-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.setup-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+
+.setup-card h3 {
+  font-size: 20px;
+  margin: 6px 0;
+}
+
+.setup-card p {
+  font-size: 13px;
+  margin: 0 0 16px;
+}
+
+.quick-salary-presets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #777;
+}
+
+.preset-btn {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.preset-btn.active {
+  background: #111;
+  color: #fff;
+}
+
+.payday-dropdown {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 12px;
+  font: inherit;
+  font-size: 13px;
+  margin-top: 6px;
+  background: #fff;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.accent-total {
+  font-size: 22px;
+  color: var(--orange);
+}
+
+.expense-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.expense-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid #ddd;
+  padding: 10px 14px;
+}
+
+.expense-item-row b {
+  font-size: 12px;
+}
+
+.item-row-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.delete-item-btn {
+  background: transparent;
+  border: 0;
+  font-size: 18px;
+  color: #777;
+  cursor: pointer;
+}
+
+.add-expense-bar {
+  display: grid;
+  grid-template-columns: 1fr 140px auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-expense-bar input {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.submit-setup-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 12px;
+  text-align: center;
+}

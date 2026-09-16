@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useSubscription } from '../contexts/SubscriptionContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,6 +9,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { user, logout } = useAuth();
+  const { isPremium } = useSubscription();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -40,13 +42,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             to="/alokasi"
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            02 / ALOKASI
+            02 / ALOKASI {!isPremium && <span className="text-[10px] text-amber-500 font-mono ml-1 font-bold">🔒 PRO</span>}
           </NavLink>
           <NavLink
             to="/rekomendasi"
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            03 / REKOMENDASI GAYA HIDUP
+            03 / REKOMENDASI {!isPremium && <span className="text-[10px] text-amber-500 font-mono ml-1 font-bold">🔒 PRO</span>}
           </NavLink>
           <NavLink
             to="/transaksi"
@@ -54,9 +56,25 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           >
             04 / TRANSAKSI
           </NavLink>
+          <NavLink
+            to="/subscription"
+            className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
+          >
+            05 / LANGGANAN
+          </NavLink>
         </nav>
 
         <div className="topbar-right">
+          <NavLink
+            to="/subscription"
+            className={`px-2.5 py-1 text-xs font-mono font-bold uppercase tracking-wider transition ${
+              isPremium
+                ? 'bg-emerald-600 text-white'
+                : 'bg-amber-400 text-neutral-950 hover:bg-amber-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+            }`}
+          >
+            {isPremium ? '★ PRO ADVISOR' : 'UPGRADE ADVISOR ↗'}
+          </NavLink>
           <span className="user-greeting">
             USER: <b>{user?.name || user?.email?.split('@')[0] || 'GUEST'}</b>
           </span>
@@ -137,6 +155,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </span>
           <span className="bottom-nav-num">04</span>
           <span className="bottom-nav-label">TRANSAKSI</span>
+        </NavLink>
+        <NavLink
+          to="/subscription"
+          className={({ isActive }) => (isActive ? 'bottom-nav-item active' : 'bottom-nav-item')}
+        >
+          <span className="bottom-nav-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="square">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </span>
+          <span className="bottom-nav-num">05</span>
+          <span className="bottom-nav-label">ADVISOR</span>
         </NavLink>
       </nav>
 

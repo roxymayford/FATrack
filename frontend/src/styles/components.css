@@ -84,30 +84,39 @@
 
 /* Status Pills */
 .status-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  padding: 4px 10px;
-  border: 1px solid var(--line);
+  padding: 4px 10px !important;
+  border: 1px solid var(--line) !important;
+  white-space: nowrap;
+  line-height: 1.2;
+  box-sizing: border-box;
+  text-transform: uppercase;
 }
 
-.status-pill.green {
-  background: #008547;
-  color: #fff;
-  border-color: #008547;
+.status-pill.green,
+.status-pill.status-green {
+  background: #008547 !important;
+  color: #ffffff !important;
+  border-color: #008547 !important;
 }
 
-.status-pill.orange {
-  background: var(--orange);
-  color: #fff;
-  border-color: var(--orange);
+.status-pill.orange,
+.status-pill.status-orange {
+  background: var(--orange) !important;
+  color: #ffffff !important;
+  border-color: var(--orange) !important;
 }
 
-.status-pill.red {
-  background: #c90000;
-  color: #fff;
-  border-color: #c90000;
+.status-pill.red,
+.status-pill.status-red {
+  background: #c90000 !important;
+  color: #ffffff !important;
+  border-color: #c90000 !important;
 }
 
 /* Currency Input */

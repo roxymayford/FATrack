@@ -130,9 +130,13 @@ Finace Advisor/
 │
 ├── backend/                      # Node.js + Express + TypeScript
 │   ├── src/
-│   │   ├── middleware/           # Error handler, middleware auth
-│   │   ├── routes/               # Endpoint API auth & transaksi
+│   │   ├── lib/                  # Midtrans Snap client, Supabase admin client
+│   │   ├── middleware/           # Error handler, Supabase JWT auth middleware
+│   │   ├── routes/               # /api/auth, /api/subscription, /api/midtrans webhook
+│   │   ├── types/                # Type declarations (midtrans-client)
 │   │   └── index.ts              # Express Server entrypoint
+│   ├── supabase/
+│   │   └── schema.sql            # SQL schema & trigger untuk table subscriptions
 │   ├── Dockerfile                # Production Node.js Alpine runtime
 │   └── package.json
 │
@@ -142,17 +146,45 @@ Finace Advisor/
 
 ---
 
+## 💳 Model Freemium (Money Tracker vs Financial Advisor)
+
+| Fitur | Mode Free (Money Tracker) | Mode Premium (Financial Advisor) |
+|---|:---:|:---:|
+| Pencatatan transaksi harian & riwayat | ✅ Gratis Selamanya | ✅ Lengkap |
+| Filter & ringkasan arus kas | ✅ Gratis Selamanya | ✅ Lengkap |
+| Kalkulator Safe-to-Spend adaptif | 🔒 Locked | ✅ Aktif (Live Sync) |
+| Alokasi 50/30/20 kustom | 🔒 Locked | ✅ Aktif |
+| Rekomendasi sewa kost (maks 25% gaji) | 🔒 Locked | ✅ Aktif |
+| Rekomendasi belanja minimarket & gizi | 🔒 Locked | ✅ Aktif |
+| Financial Health Score (0–100) | 🔒 Locked | ✅ Aktif |
+| Integrasi Pembayaran Midtrans Snap | — | ✅ QRIS, VA, E-Wallet |
+
+---
+
 ## 🔐 Variabel Lingkungan (.env)
 
 ### Frontend (`frontend/.env`):
 ```env
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_BACKEND_URL=http://localhost:5000
 ```
-> *Catatan: Jika Supabase tidak dikonfigurasi, sistem otomatis menggunakan Demo Mode / LocalStorage failover sehingga aplikasi tetap dapat dicoba secara penuh.*
+> *Catatan: Jika Supabase/Midtrans belum dikonfigurasi, sistem otomatis menggunakan Demo Mode / LocalStorage failover sehingga aplikasi tetap dapat dicoba secara penuh.*
 
 ### Backend (`backend/.env`):
 ```env
 PORT=5000
-NODE_ENV=production
+NODE_ENV=development
+
+# Supabase Admin / Service Role
+SUPABASE_URL=https://your_project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+# Atau gunakan SUPABASE_ANON_KEY jika service role belum tersedia
+SUPABASE_ANON_KEY=your_anon_key
+
+# Midtrans Payment Gateway (Sandbox)
+MIDTRANS_SERVER_KEY=SB-Mid-server-xxx
+MIDTRANS_CLIENT_KEY=SB-Mid-client-xxx
+MIDTRANS_IS_PRODUCTION=false
 ```
+

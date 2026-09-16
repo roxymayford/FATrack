@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import { requireAuth, AuthenticatedRequest } from '../middleware/auth.js';
 
 export const authRouter = Router();
 
@@ -57,3 +58,12 @@ authRouter.post('/forgot-password', (req: Request, res: Response) => {
     message: 'Tautan pengaturan ulang kata sandi telah dikirimkan ke email Anda.',
   });
 });
+
+// GET /api/auth/me
+authRouter.get('/me', requireAuth, (req: AuthenticatedRequest, res: Response) => {
+  return res.status(200).json({
+    status: 'success',
+    user: req.user,
+  });
+});
+

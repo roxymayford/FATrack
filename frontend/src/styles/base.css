@@ -53,8 +53,12 @@ small {
   color: #008547 !important;
 }
 
-.red-text {
+.orange-text {
   color: var(--orange) !important;
+}
+
+.red-text {
+  color: #c90000 !important;
 }
 
 .muted-text {
@@ -72,6 +76,16 @@ small {
 
 .red {
   color: var(--orange);
+}
+
+/* Safety overrides so utility classes do not bleed into pills */
+.status-pill.green,
+.status-pill.status-green,
+.status-pill.orange,
+.status-pill.status-orange,
+.status-pill.red,
+.status-pill.status-red {
+  color: #ffffff !important;
 }
 
 /* Visibility Utilities */

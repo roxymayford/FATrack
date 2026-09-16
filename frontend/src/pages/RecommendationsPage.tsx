@@ -7,6 +7,7 @@ import { kostTiers, getKostTierForSalary } from '../data/recommendations';
 import { formatRupiah, calculateAllocation } from '../lib/calculator';
 import { KostCard } from '../components/KostCard';
 import { MealPlanCard } from '../components/MealPlanCard';
+import { SubscriptionGate } from '../components/SubscriptionGate';
 
 export const RecommendationsPage: React.FC = () => {
   const { user } = useAuth();
@@ -66,76 +67,82 @@ export const RecommendationsPage: React.FC = () => {
 
   return (
     <div ref={rootRef} className="recommendations-page-container">
-      <div className="page-head-strip">
-        <div>
-          <small className="accent">MODUL 03 / LIFESTYLE RECOMMENDATION ENGINE</small>
-          <h2>REKOMENDASI GAYA HIDUP KONKRET</h2>
-          <p>
-            Konversi angka persentase finansial Anda ke dalam pilihan nyata: tipe hunian kost yang aman
-            dan opsi belanja makanan retail minimarket di kota besar.
-          </p>
-        </div>
-
-        <div className="lifestyle-user-summary">
+      <SubscriptionGate
+        title="Rekomendasi Gaya Hidup & Plafon Kost Cerdas"
+        description="Akses matriks rekomendasi tipe hunian kost maksimal 25% gaji, paket belanja minimarket riil, dan kalkulator gizi harian yang disesuaikan khusus dengan profil kas Anda."
+        featureName="Financial Advisor"
+      >
+        <div className="page-head-strip">
           <div>
-            <small>GAJI BERSIH TERDETEKSI</small>
-            <b>{formatRupiah(salary)}/bln</b>
-          </div>
-          <div>
-            <small>BATAS SEWA KOST MAKS (25%)</small>
-            <b className="accent">{formatRupiah(maxRentBudget)}/bln</b>
-          </div>
-        </div>
-      </div>
-
-      {/* TABS SELECTOR */}
-      <div className="recommendations-tabs-bar">
-        <button
-          type="button"
-          className={`rec-tab-btn ${activeTab === 'kost' ? 'active' : ''}`}
-          onClick={() => setActiveTab('kost')}
-        >
-          01 / REKOMENDASI KOST & TEMPAT TINGGAL
-        </button>
-        <button
-          type="button"
-          className={`rec-tab-btn ${activeTab === 'meals' ? 'active' : ''}`}
-          onClick={() => setActiveTab('meals')}
-        >
-          02 / REKOMENDASI MAKAN & PAKET MINIMARKET
-        </button>
-      </div>
-
-      {/* CONTENT */}
-      {activeTab === 'kost' ? (
-        <section className="kost-recommendations-section">
-          <div className="recommendation-criteria-banner">
-            <div>
-              <small className="accent">MATRIKS FORMULA HUNIAN</small>
-              <h4>PLAFON SEWA: MAKSIMAL 20% – 25% GAJI</h4>
-            </div>
+            <small className="accent">MODUL 03 / LIFESTYLE RECOMMENDATION ENGINE</small>
+            <h2>REKOMENDASI GAYA HIDUP KONKRET</h2>
             <p>
-              Menyewa tempat tinggal di atas 25% gaji bulanan berisiko tinggi memicu defisit kas dan
-              mengorbankan jatah tabungan darurat Anda.
+              Konversi angka persentase finansial Anda ke dalam pilihan nyata: tipe hunian kost yang aman
+              dan opsi belanja makanan retail minimarket di kota besar.
             </p>
           </div>
 
-          <div className="kost-cards-grid">
-            {kostTiers.map((tier) => (
-              <KostCard
-                key={tier.id}
-                tier={tier}
-                isRecommended={tier.id === recommendedTier.id}
-                userSalary={salary}
-              />
-            ))}
+          <div className="lifestyle-user-summary">
+            <div>
+              <small>GAJI BERSIH TERDETEKSI</small>
+              <b>{formatRupiah(salary)}/bln</b>
+            </div>
+            <div>
+              <small>BATAS SEWA KOST MAKS (25%)</small>
+              <b className="accent">{formatRupiah(maxRentBudget)}/bln</b>
+            </div>
           </div>
-        </section>
-      ) : (
-        <section className="meal-recommendations-section">
-          <MealPlanCard userNeedsAmount={defaultAllocation.needsAmount} />
-        </section>
-      )}
+        </div>
+
+        {/* TABS SELECTOR */}
+        <div className="recommendations-tabs-bar">
+          <button
+            type="button"
+            className={`rec-tab-btn ${activeTab === 'kost' ? 'active' : ''}`}
+            onClick={() => setActiveTab('kost')}
+          >
+            01 / REKOMENDASI KOST & TEMPAT TINGGAL
+          </button>
+          <button
+            type="button"
+            className={`rec-tab-btn ${activeTab === 'meals' ? 'active' : ''}`}
+            onClick={() => setActiveTab('meals')}
+          >
+            02 / REKOMENDASI MAKAN & PAKET MINIMARKET
+          </button>
+        </div>
+
+        {/* CONTENT */}
+        {activeTab === 'kost' ? (
+          <section className="kost-recommendations-section">
+            <div className="recommendation-criteria-banner">
+              <div>
+                <small className="accent">MATRIKS FORMULA HUNIAN</small>
+                <h4>PLAFON SEWA: MAKSIMAL 20% – 25% GAJI</h4>
+              </div>
+              <p>
+                Menyewa tempat tinggal di atas 25% gaji bulanan berisiko tinggi memicu defisit kas dan
+                mengorbankan jatah tabungan darurat Anda.
+              </p>
+            </div>
+
+            <div className="kost-cards-grid">
+              {kostTiers.map((tier) => (
+                <KostCard
+                  key={tier.id}
+                  tier={tier}
+                  isRecommended={tier.id === recommendedTier.id}
+                  userSalary={salary}
+                />
+              ))}
+            </div>
+          </section>
+        ) : (
+          <section className="meal-recommendations-section">
+            <MealPlanCard userNeedsAmount={defaultAllocation.needsAmount} />
+          </section>
+        )}
+      </SubscriptionGate>
     </div>
   );
 };

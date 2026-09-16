@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 're
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { useAuth } from '../contexts/AuthContext';
+import { useSubscription } from '../contexts/SubscriptionContext';
 import {
   UserProfile,
   BudgetSettings,
@@ -30,6 +31,7 @@ import { TransactionList } from '../components/TransactionList';
 
 export const DashboardPage: React.FC = () => {
   const { user } = useAuth();
+  const { isPremium } = useSubscription();
   const navigate = useNavigate();
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -229,6 +231,30 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div ref={rootRef} className="dashboard-page-container">
+      {/* FREE TIER NOTICE BANNER */}
+      {!isPremium && (
+        <div className="border-2 border-neutral-900 bg-amber-50 p-4 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="flex items-center gap-3">
+            <span className="w-3 h-3 bg-amber-500 border border-neutral-900 shrink-0"></span>
+            <div>
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 block">
+                MODE MONEY TRACKER AKTIF
+              </span>
+              <span className="text-xs text-neutral-600 font-sans">
+                Aplikasi berjalan dalam mode pencatat pengeluaran. Buka kalkulator Safe-to-Spend adaptif, analisis 50/30/20, dan rekomendasi sewa kost dengan upgrade.
+              </span>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => navigate('/subscription')}
+            className="px-3.5 py-1.5 font-mono font-bold text-xs uppercase bg-neutral-900 text-white hover:bg-neutral-800 transition shrink-0"
+          >
+            Upgrade ke Advisor (Rp 29.900) →
+          </button>
+        </div>
+      )}
+
       {/* DASHBOARD HERO HEADER */}
       <section className="dashboard-hero-strip">
         <div className="strip-title-box">
@@ -252,15 +278,25 @@ export const DashboardPage: React.FC = () => {
             className="tag-btn active"
             onClick={() => navigate('/alokasi')}
           >
-            ⇄ ATUR ALOKASI 50/30/20
+            ⇄ ALOKASI 50/30/20 {!isPremium && <small style={{ color: '#d97706' }}>🔒 PRO</small>}
           </button>
           <button
             type="button"
             className="tag-btn"
             onClick={() => navigate('/rekomendasi')}
           >
-            ★ REKOMENDASI GAYA HIDUP →
+            ★ REKOMENDASI GAYA HIDUP {!isPremium && <small style={{ color: '#d97706' }}>🔒 PRO</small>} →
           </button>
+          {!isPremium && (
+            <button
+              type="button"
+              className="tag-btn"
+              onClick={() => navigate('/subscription')}
+              style={{ backgroundColor: '#fef3c7', borderColor: '#d97706', color: '#78350f', fontWeight: 'bold' }}
+            >
+              ★ UPGRADE ADVISOR
+            </button>
+          )}
         </div>
       </section>
 
@@ -277,7 +313,7 @@ export const DashboardPage: React.FC = () => {
       {/* TOP KPI METRICS STRIP */}
       <section className="dashboard-kpi-grid">
         <div className="kpi-cell">
-          <small>BATAS JAJAN HARIAN</small>
+          <small>BATAS JAJAN HARIAN {!isPremium && <span style={{ color: '#d97706' }}>[ADVISOR]</span>}</small>
           <strong>{formatRupiah(allocation.dailyLimit)}</strong>
           <span>Safe-to-Spend / hari</span>
         </div>
@@ -294,7 +330,7 @@ export const DashboardPage: React.FC = () => {
           <span>Setelah Biaya Tetap & Tabungan</span>
         </div>
         <div className="kpi-cell">
-          <small>SKOR KESEHATAN KEUANGAN</small>
+          <small>SKOR KESEHATAN KEUANGAN {!isPremium && <span style={{ color: '#d97706' }}>[ADVISOR]</span>}</small>
           <strong className={healthScore >= 70 ? 'green-text' : healthScore >= 50 ? 'accent' : 'red-text'}>
             {healthScore} / 100
           </strong>

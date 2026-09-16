@@ -11,6 +11,7 @@ import {
 } from '../lib/storage';
 import { AllocationPercentages, formatRupiah, calculateAllocation } from '../lib/calculator';
 import { AllocationSlider } from '../components/AllocationSlider';
+import { SubscriptionGate } from '../components/SubscriptionGate';
 
 export const AllocationPage: React.FC = () => {
   const { user } = useAuth();
@@ -102,90 +103,96 @@ export const AllocationPage: React.FC = () => {
 
   return (
     <div ref={rootRef} className="allocation-page-container">
-      <div className="page-head-strip">
-        <div>
-          <small className="accent">MODUL 02 / ENGINE ALOKASI KEUANGAN</small>
-          <h2>CUSTOMIZABLE FINANCIAL ADVISOR</h2>
-          <p>
-            Konfigurasikan batas rasio pengeluaran adaptif berbasis standar 50/30/20.
-            Sesuaikan proporsi kebutuhan pokok, gaya hidup, dan investasi sesuai tujuan keuangan Anda.
-          </p>
-        </div>
-        <div className="head-right-cta">
-          {isSaved && <span className="save-success-tag">✓ PENGATURAN DISIMPAN</span>}
-          <button type="button" className="pill dark" onClick={handleSave}>
-            SIMPAN PERUBAHAN
-          </button>
-        </div>
-      </div>
-
-      <div className="allocation-content-grid">
-        <div className="allocation-main-card">
-          <AllocationSlider
-            percentages={percentages}
-            onChange={setPercentages}
-            monthlySalary={salary}
-            fixedExpenses={fixedExpenses}
-          />
-        </div>
-
-        <aside className="allocation-summary-sidebar terminal">
-          <div className="terminal-head">
-            <span className="terminal-pulse">■</span> HASIL KALKULASI ARUS KAS
-            <span>LIVE SYNC</span>
+      <SubscriptionGate
+        title="Kalkulator Alokasi Finansial 50/30/20 Adaptif"
+        description="Fitur ini adalah bagian dari modul Financial Advisor cerdas. Anda dapat menyesuaikan persentase kebutuhan, keinginan, dan tabungan serta menghitung Safe-to-Spend harian secara live setelah upgrade."
+        featureName="Financial Advisor"
+      >
+        <div className="page-head-strip">
+          <div>
+            <small className="accent">MODUL 02 / ENGINE ALOKASI KEUANGAN</small>
+            <h2>CUSTOMIZABLE FINANCIAL ADVISOR</h2>
+            <p>
+              Konfigurasikan batas rasio pengeluaran adaptif berbasis standar 50/30/20.
+              Sesuaikan proporsi kebutuhan pokok, gaya hidup, dan investasi sesuai tujuan keuangan Anda.
+            </p>
           </div>
-
-          <div className="terminal-body">
-            <div className="worth terminal-card">
-              <small>SAFE-TO-SPEND HARIAN</small>
-              <strong>{formatRupiah(allocationResult.dailyLimit)} <small>/ hari</small></strong>
-              <span>Batas aman belanja harian Anda</span>
-            </div>
-
-            <div className="twins terminal-card">
-              <div>
-                <small>NEEDS (POKOK)</small>
-                <b>{formatRupiah(allocationResult.needsAmount)}</b>
-                <span>{percentages.needs}% dari sisa bersih</span>
-              </div>
-              <div>
-                <small>WANTS (LIFESTYLE)</small>
-                <b className="accent">{formatRupiah(allocationResult.wantsAmount)}</b>
-                <span>{percentages.wants}% dari sisa bersih</span>
-              </div>
-            </div>
-
-            <div className="allocation terminal-card">
-              <small>TARGET TABUNGAN & INVESTASI</small>
-              <div style={{ margin: '8px 0' }}>
-                <strong className="green-text" style={{ fontSize: '24px' }}>
-                  {formatRupiah(allocationResult.savingsAmount)}
-                </strong>
-              </div>
-              <span>
-                Porsi Tabungan: <b>{percentages.savings}%</b>
-                <i>
-                  <em style={{ width: `${percentages.savings}%`, backgroundColor: '#008547' }} />
-                </i>
-              </span>
-              <span>
-                Sisa Hari Siklus: <b>{allocationResult.daysInCycle} Hari</b>
-              </span>
-            </div>
-          </div>
-
-          <div className="terminal-foot">
-            <button
-              type="button"
-              className="tag-btn full-width"
-              onClick={() => navigate('/rekomendasi')}
-              style={{ width: '100%', textAlign: 'center' }}
-            >
-              LIHAT REKOMENDASI GAYA HIDUP →
+          <div className="head-right-cta">
+            {isSaved && <span className="save-success-tag">✓ PENGATURAN DISIMPAN</span>}
+            <button type="button" className="pill dark" onClick={handleSave}>
+              SIMPAN PERUBAHAN
             </button>
           </div>
-        </aside>
-      </div>
+        </div>
+
+        <div className="allocation-content-grid">
+          <div className="allocation-main-card">
+            <AllocationSlider
+              percentages={percentages}
+              onChange={setPercentages}
+              monthlySalary={salary}
+              fixedExpenses={fixedExpenses}
+            />
+          </div>
+
+          <aside className="allocation-summary-sidebar terminal">
+            <div className="terminal-head">
+              <span className="terminal-pulse">■</span> HASIL KALKULASI ARUS KAS
+              <span>LIVE SYNC</span>
+            </div>
+
+            <div className="terminal-body">
+              <div className="worth terminal-card">
+                <small>SAFE-TO-SPEND HARIAN</small>
+                <strong>{formatRupiah(allocationResult.dailyLimit)} <small>/ hari</small></strong>
+                <span>Batas aman belanja harian Anda</span>
+              </div>
+
+              <div className="twins terminal-card">
+                <div>
+                  <small>NEEDS (POKOK)</small>
+                  <b>{formatRupiah(allocationResult.needsAmount)}</b>
+                  <span>{percentages.needs}% dari sisa bersih</span>
+                </div>
+                <div>
+                  <small>WANTS (LIFESTYLE)</small>
+                  <b className="accent">{formatRupiah(allocationResult.wantsAmount)}</b>
+                  <span>{percentages.wants}% dari sisa bersih</span>
+                </div>
+              </div>
+
+              <div className="allocation terminal-card">
+                <small>TARGET TABUNGAN & INVESTASI</small>
+                <div style={{ margin: '8px 0' }}>
+                  <strong className="green-text" style={{ fontSize: '24px' }}>
+                    {formatRupiah(allocationResult.savingsAmount)}
+                  </strong>
+                </div>
+                <span>
+                  Porsi Tabungan: <b>{percentages.savings}%</b>
+                  <i>
+                    <em style={{ width: `${percentages.savings}%`, backgroundColor: '#008547' }} />
+                  </i>
+                </span>
+                <span>
+                  Sisa Hari Siklus: <b>{allocationResult.daysInCycle} Hari</b>
+                </span>
+              </div>
+            </div>
+
+            <div className="terminal-foot">
+              <button
+                type="button"
+                className="tag-btn full-width"
+                onClick={() => navigate('/rekomendasi')}
+                style={{ width: '100%', textAlign: 'center' }}
+              >
+                LIHAT REKOMENDASI GAYA HIDUP →
+              </button>
+            </div>
+          </aside>
+        </div>
+      </SubscriptionGate>
     </div>
   );
 };

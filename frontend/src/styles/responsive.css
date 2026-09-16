@@ -571,7 +571,7 @@
   .hero-bottom .outline { margin-left: 0; text-align: center; }
   .micro, .metrics, .feature-grid, .orange-grid, .site-footer { grid-template-columns: 1fr; }
   .metric { border-right: 0; border-bottom: 1px solid #111; }
-  .matrix, .orange { padding: 30px 18px; }
+  .matrix, section.orange { padding: 30px 18px; }
   .matrix { overflow: auto; }
   .matrix table { min-width: 620px; }
   .section-head { padding: 22px 18px; display: block; }
@@ -584,7 +584,7 @@
   .terminal-head > span:last-child { max-width: 38%; }
   .terminal-body { padding: 16px; min-width: 0; }
   .worth strong { font-size: 27px; overflow-wrap: anywhere; }
-  .orange h2, .cta h2 { font-size: clamp(34px, 11vw, 48px); }
+  section.orange h2, .cta h2 { font-size: clamp(34px, 11vw, 48px); }
   .cta { margin: 18px; padding: 25px; }
   .cta form { gap: 16px; }
   .site-footer > div { border-right: 0; border-bottom: 1px solid #111; }

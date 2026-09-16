@@ -412,8 +412,14 @@
 .health-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 20px;
+}
+
+.health-top h4 {
+  font-size: 20px;
+  margin: 4px 0 0;
+  letter-spacing: -0.03em;
 }
 
 .score-main-display {

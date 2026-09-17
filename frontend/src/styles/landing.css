@@ -312,7 +312,6 @@ section.orange h2,
   display: block;
   height: 6px;
   background: var(--orange) !important;
-  border-bottom: 1px solid var(--line);
 }
 
 .section-head {
@@ -393,6 +392,10 @@ section.orange h2,
   padding: 11px 0;
   border-bottom: 1px solid #ddd;
   font-size: 12px;
+}
+
+.mini span:last-child {
+  border-bottom: 0;
 }
 
 .mini em {

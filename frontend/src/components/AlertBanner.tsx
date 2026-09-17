@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from './Icon';
 import { formatRupiah } from '../lib/calculator';
 
 interface AlertBannerProps {
@@ -29,7 +30,7 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
     <div className="alert-banner-stack">
       {isOverWants && (
         <div className="swiss-alert alert-wants-exceeded">
-          <div className="alert-icon">⚠</div>
+          <div className="alert-icon"><Icon name="alert" size={20} /></div>
           <div className="alert-content">
             <b>PERINGATAN ANGGARAN: ALOKASI WANTS MELAMPAUI TARGET</b>
             <p>
@@ -45,7 +46,7 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
 
       {isOverDaily && (
         <div className="swiss-alert alert-daily-exceeded">
-          <div className="alert-icon">⚡</div>
+          <div className="alert-icon"><Icon name="bolt" size={20} /></div>
           <div className="alert-content">
             <b>PERINGATAN LIMIT HARIAN: BATAS JAJAN HARI INI TERLAMPAUI</b>
             <p>

@@ -12,6 +12,7 @@ import {
 import { AllocationPercentages, formatRupiah, calculateAllocation } from '../lib/calculator';
 import { AllocationSlider } from '../components/AllocationSlider';
 import { SubscriptionGate } from '../components/SubscriptionGate';
+import { Icon } from '../components/Icon';
 
 export const AllocationPage: React.FC = () => {
   const { user } = useAuth();
@@ -118,7 +119,7 @@ export const AllocationPage: React.FC = () => {
             </p>
           </div>
           <div className="head-right-cta">
-            {isSaved && <span className="save-success-tag">✓ PENGATURAN DISIMPAN</span>}
+            {isSaved && <span className="save-success-tag inline-flex items-center gap-1"><Icon name="check" size={13} /> PENGATURAN DISIMPAN</span>}
             <button type="button" className="pill dark" onClick={handleSave}>
               SIMPAN PERUBAHAN
             </button>
@@ -187,7 +188,7 @@ export const AllocationPage: React.FC = () => {
                 onClick={() => navigate('/rekomendasi')}
                 style={{ width: '100%', textAlign: 'center' }}
               >
-                LIHAT REKOMENDASI GAYA HIDUP →
+                <span className="inline-flex items-center justify-center gap-1.5">LIHAT REKOMENDASI GAYA HIDUP <Icon name="arrowRight" size={14} /></span>
               </button>
             </div>
           </aside>

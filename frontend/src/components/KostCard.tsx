@@ -1,6 +1,7 @@
 import React from 'react';
 import { KostTier } from '../data/recommendations';
 import { formatRupiah } from '../lib/calculator';
+import { Icon } from './Icon';
 
 interface KostCardProps {
   tier: KostTier;
@@ -15,7 +16,7 @@ export const KostCard: React.FC<KostCardProps> = ({ tier, isRecommended, userSal
     <article className={`kost-card ${isRecommended ? 'kost-card-recommended' : ''}`}>
       {isRecommended && (
         <div className="recommendation-badge">
-          ★ REKOMENDASI SESUAI GAJI ANDA
+          <Icon name="star" size={14} /> REKOMENDASI SESUAI GAJI ANDA
         </div>
       )}
 
@@ -37,7 +38,7 @@ export const KostCard: React.FC<KostCardProps> = ({ tier, isRecommended, userSal
         <div className="facilities-tags">
           {tier.facilities.map((fac) => (
             <span key={fac} className="facility-tag">
-              ✓ {fac}
+              <Icon name="check" size={14} /> {fac}
             </span>
           ))}
         </div>

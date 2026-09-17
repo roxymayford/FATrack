@@ -247,6 +247,10 @@
   border-right: 1px solid #111;
 }
 
+.site-footer > div:last-child {
+  border-right: 0;
+}
+
 .site-footer p {
   font-size: 13px;
   color: #111;

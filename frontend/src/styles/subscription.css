@@ -1,0 +1,699 @@
+/* ==========================================================================
+   Subscription Page & Paywall — Swiss Design
+   ========================================================================== */
+
+/* Topbar Badge — PRO/UPGRADE */
+.badge-plan {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.badge-plan--free {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+}
+
+.badge-plan--free:hover {
+  background: #e0431f;
+}
+
+.badge-plan--pro {
+  background: #008547;
+  color: #fff;
+  border-color: #008547;
+}
+
+/* Nav lock label */
+.nav-lock-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-left: 4px;
+}
+
+/* Free-tier notice banner on dashboard */
+.free-tier-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #fff8e6;
+  border: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.free-tier-notice__content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.free-tier-notice__dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--orange);
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.free-tier-notice__label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--line);
+  margin-bottom: 4px;
+}
+
+.free-tier-notice__desc {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Dashboard upgrade tag-btn override */
+.tag-btn--upgrade {
+  background: #fff8e6 !important;
+  border-color: var(--orange) !important;
+  color: #78350f !important;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Subscription Page Layout
+   ========================================================================== */
+
+.subscription-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Page header */
+.subscription-header {
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.subscription-header__label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.subscription-header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin: 0;
+  max-width: none;
+}
+
+.subscription-header__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subscription-header__status-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.subscription-header__desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  max-width: 680px;
+  margin-top: 16px;
+}
+
+/* Notification modal/alert */
+.sub-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sub-alert--success {
+  background: #e6f5ec;
+  border-color: #008547;
+  color: #005c30;
+}
+
+.sub-alert--error {
+  background: #ffebe6;
+  border-color: #c90000;
+  color: #8a0000;
+}
+
+.sub-alert--info {
+  background: #fff8e6;
+  border-color: #d9822b;
+  color: #8a4f0f;
+}
+
+.sub-alert__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sub-alert__close {
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+/* Active subscription banner */
+.sub-active-banner {
+  padding: 24px 28px;
+  border: 1px solid #008547;
+  background: #e6f5ec;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sub-active-banner__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #005c30;
+  margin-bottom: 4px;
+}
+
+.sub-active-banner__plan {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--line);
+}
+
+.sub-active-banner__expiry {
+  font-size: 11px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.sub-active-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sub-active-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--line);
+  color: #fff;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sub-active-banner__btn:hover {
+  background: #333;
+}
+
+.sub-active-banner__reset {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 0;
+  color: #777;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sub-active-banner__reset:hover {
+  color: var(--line);
+}
+
+/* Plan cards grid */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.plan-card {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.plan-card--featured {
+  background: #fff8e6;
+}
+
+.plan-card--active {
+  box-shadow: 6px 6px 0 #008547;
+  border-color: #008547;
+}
+
+.plan-card--dimmed {
+  opacity: 0.6;
+}
+
+/* Plan card header */
+.plan-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.plan-card__tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--line);
+}
+
+.plan-card__tag--popular {
+  background: #fff8e6;
+}
+
+.plan-card__tag--best {
+  background: var(--line);
+  color: #fff8e6;
+}
+
+.plan-card__status {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #008547;
+}
+
+.plan-card__title {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.plan-card__price {
+  margin: 16px 0 20px;
+}
+
+.plan-card__price-val {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.plan-card__price-unit {
+  font-size: 11px;
+  color: #777;
+}
+
+.plan-card__desc {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+  margin: 0 0 20px;
+}
+
+/* Plan feature list */
+.plan-card__features {
+  list-style: none;
+  margin: 0;
+  padding: 16px 0 0;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.plan-card__feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--line);
+}
+
+.plan-card__feature--locked {
+  color: #aaa;
+}
+
+.plan-card__feature-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.plan-card__feature-icon--check {
+  color: #008547;
+}
+
+.plan-card__feature-icon--star {
+  color: var(--orange);
+}
+
+.plan-card__feature-icon--x {
+  color: #aaa;
+}
+
+/* Plan card footer button */
+.plan-card__footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+}
+
+.plan-card__btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.plan-card__btn--active {
+  background: #008547;
+  color: #fff;
+  border-color: #008547;
+  cursor: default;
+}
+
+.plan-card__btn--dark {
+  background: var(--line);
+  color: #fff;
+}
+
+.plan-card__btn--dark:hover {
+  background: #333;
+}
+
+.plan-card__btn--orange {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+}
+
+.plan-card__btn--orange:hover {
+  background: #e0431f;
+}
+
+.plan-card__btn--disabled {
+  background: var(--paper);
+  color: #aaa;
+  cursor: default;
+}
+
+.plan-card__btn--outline {
+  background: #fff;
+  color: var(--line);
+}
+
+.plan-card__btn--outline:hover {
+  background: var(--paper);
+}
+
+/* Payment info footer */
+.sub-payment-info {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 24px;
+  font-size: 12px;
+  color: #555;
+}
+
+.sub-payment-info__title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--line);
+  margin-bottom: 8px;
+}
+
+.sub-payment-info p {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Subscription Gate / Paywall — Swiss Design
+   ========================================================================== */
+
+.sub-gate-loading {
+  padding: 32px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.sub-gate {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 40px;
+  margin: 24px 0;
+}
+
+.sub-gate__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.sub-gate__top-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sub-gate__top-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--orange);
+  border: 1px solid var(--line);
+}
+
+.sub-gate__top-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.sub-gate__status {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: var(--line);
+  color: #fff;
+}
+
+.sub-gate__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.sub-gate__title {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px;
+}
+
+.sub-gate__desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.sub-gate__compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.sub-gate__compare-cell {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+}
+
+.sub-gate__compare-cell--free {
+  background: #fff;
+}
+
+.sub-gate__compare-cell--premium {
+  background: #fff8e6;
+}
+
+.sub-gate__compare-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.sub-gate__compare-cell--free .sub-gate__compare-label {
+  color: #aaa;
+}
+
+.sub-gate__compare-cell--premium .sub-gate__compare-label {
+  color: #8a4f0f;
+}
+
+.sub-gate__compare-val {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--line);
+}
+
+.sub-gate__compare-icon--check {
+  color: #008547;
+}
+
+.sub-gate__compare-icon--star {
+  color: var(--orange);
+}
+
+/* Paywall CTA buttons */
+.sub-gate__cta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.sub-gate__cta-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: #fff;
+  border: 1px solid var(--orange);
+  box-shadow: 4px 4px 0 var(--line);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sub-gate__cta-primary:hover {
+  background: #e0431f;
+  box-shadow: 6px 6px 0 var(--line);
+  transform: translate(-1px, -1px);
+}
+
+.sub-gate__cta-secondary {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-align: center;
+  color: #555;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.sub-gate__cta-secondary:hover {
+  color: var(--line);
+}

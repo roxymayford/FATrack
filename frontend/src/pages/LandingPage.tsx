@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAuth } from '../contexts/AuthContext';
+import { Icon } from '../components/Icon';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -220,17 +221,15 @@ export const LandingPage: React.FC = () => {
       });
 
       // 8. Lifestyle Tiers Interactive Scroll Activation
-      lifestyleTiers.forEach((tier) => {
-        const el = document.getElementById(tier.id);
-        if (el) {
-          ScrollTrigger.create({
-            trigger: el,
-            start: 'top 70%',
-            end: 'bottom 35%',
-            toggleClass: { targets: el, className: 'tier-active-highlight' },
-          });
-        }
-      });
+      const tierGrid = document.querySelector('.feature-grid');
+      if (tierGrid) {
+        ScrollTrigger.create({
+          trigger: tierGrid,
+          start: 'top 75%',
+          end: 'bottom 30%',
+          toggleClass: { targets: '.feature', className: 'tier-active-highlight' },
+        });
+      }
 
       gsap.from('.feature', {
         scrollTrigger: {
@@ -338,7 +337,7 @@ export const LandingPage: React.FC = () => {
                   BUKA AKUN GRATIS
                 </button>
                 <button className="outline" type="button" onClick={handleDemo}>
-                  COBA DEMO LANGSUNG →
+                  <span className="inline-flex items-center gap-1.5">COBA DEMO LANGSUNG <Icon name="arrowRight" size={14} /></span>
                 </button>
               </div>
               <div className="micro">
@@ -406,15 +405,15 @@ export const LandingPage: React.FC = () => {
         <section className="swiss-marquee-section">
           <div className="swiss-marquee-track">
             <span>FATRACK <b className="sep">/</b> PERSONAL FINANCE ADVISOR</span>
-            <span><b className="sep">✦</b> SAFE-TO-SPEND FORMULA</span>
-            <span><b className="sep">✦</b> ZERO ARITHMETIC DRIFT</span>
-            <span><b className="sep">✦</b> 50/30/20 ADAPTIVE RATIO</span>
-            <span><b className="sep">✦</b> KOST & MINIMARKET RECOMMENDATION</span>
-            <span><b className="sep">✦</b> EDISI INDONESIA 2026</span>
-            <span><b className="sep">✦</b> SUPABASE ENCRYPTED</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> SAFE-TO-SPEND FORMULA</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> ZERO ARITHMETIC DRIFT</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> 50/30/20 ADAPTIVE RATIO</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> KOST & MINIMARKET RECOMMENDATION</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> EDISI INDONESIA 2026</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> SUPABASE ENCRYPTED</span>
             <span>FATRACK <b className="sep">/</b> PERSONAL FINANCE ADVISOR</span>
-            <span><b className="sep">✦</b> SAFE-TO-SPEND FORMULA</span>
-            <span><b className="sep">✦</b> ZERO ARITHMETIC DRIFT</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> SAFE-TO-SPEND FORMULA</span>
+            <span><b className="sep"><Icon name="sparkle" size={12} /></b> ZERO ARITHMETIC DRIFT</span>
           </div>
         </section>
 
@@ -486,7 +485,7 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 <footer>
-                  STATUS: {tier.status} <a href="#hero" onClick={handleStart}>TERAPKAN →</a>
+                  STATUS: {tier.status} <a href="#hero" onClick={handleStart}><span className="inline-flex items-center gap-1">TERAPKAN <Icon name="arrowRight" size={12} /></span></a>
                 </footer>
               </article>
             ))}
@@ -500,11 +499,11 @@ export const LandingPage: React.FC = () => {
           <p className="lead">
             Bergabunglah dengan anak muda Indonesia yang mengontrol arus kas dan gaya hidup dengan kalkulasi riil.
           </p>
-          <div style={{ marginTop: '24px' }}>
+          <div className="cta-actions">
             <button className="pill dark" type="button" onClick={handleStart}>
               BUAT AKUN SEKARANG
             </button>
-            <button className="outline" type="button" onClick={handleDemo} style={{ marginLeft: '12px' }}>
+            <button className="outline" type="button" onClick={handleDemo}>
               MASUK KE DEMO MODE
             </button>
           </div>

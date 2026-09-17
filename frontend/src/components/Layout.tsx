@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
+import { Icon } from './Icon';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -42,13 +43,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             to="/alokasi"
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            02 / ALOKASI {!isPremium && <span className="text-[10px] text-amber-500 font-mono ml-1 font-bold">🔒 PRO</span>}
+            02 / ALOKASI {!isPremium && <span className="nav-lock-tag"><Icon name="lock" size={11} /> PRO</span>}
           </NavLink>
           <NavLink
             to="/rekomendasi"
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            03 / REKOMENDASI {!isPremium && <span className="text-[10px] text-amber-500 font-mono ml-1 font-bold">🔒 PRO</span>}
+            03 / REKOMENDASI {!isPremium && <span className="nav-lock-tag"><Icon name="lock" size={11} /> PRO</span>}
           </NavLink>
           <NavLink
             to="/transaksi"
@@ -67,19 +68,19 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="topbar-right">
           <NavLink
             to="/subscription"
-            className={`px-2.5 py-1 text-xs font-mono font-bold uppercase tracking-wider transition ${
-              isPremium
-                ? 'bg-emerald-600 text-white'
-                : 'bg-amber-400 text-neutral-950 hover:bg-amber-300 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
-            }`}
+            className={`badge-plan ${isPremium ? 'badge-plan--pro' : 'badge-plan--free'}`}
           >
-            {isPremium ? '★ PRO ADVISOR' : 'UPGRADE ADVISOR ↗'}
+            {isPremium ? (
+              <span className="inline-flex items-center gap-1"><Icon name="star" size={12} /> PRO ADVISOR</span>
+            ) : (
+              <span className="inline-flex items-center gap-1"><span className="upgrade-label">UPGRADE ADVISOR</span><Icon name="external" size={12} /></span>
+            )}
           </NavLink>
           <span className="user-greeting">
             USER: <b>{user?.name || user?.email?.split('@')[0] || 'GUEST'}</b>
           </span>
           <button type="button" className="logout-btn" onClick={handleLogout} title="Keluar dari akun">
-            KELUAR →
+            <span className="inline-flex items-center gap-1">KELUAR <Icon name="arrowRight" size={12} /></span>
           </button>
         </div>
       </header>

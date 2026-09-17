@@ -28,6 +28,7 @@ import { HealthScoreCard } from '../components/HealthScoreCard';
 import { AlertBanner } from '../components/AlertBanner';
 import { TransactionForm } from '../components/TransactionForm';
 import { TransactionList } from '../components/TransactionList';
+import { Icon } from '../components/Icon';
 
 export const DashboardPage: React.FC = () => {
   const { user } = useAuth();
@@ -233,14 +234,14 @@ export const DashboardPage: React.FC = () => {
     <div ref={rootRef} className="dashboard-page-container">
       {/* FREE TIER NOTICE BANNER */}
       {!isPremium && (
-        <div className="border-2 border-neutral-900 bg-amber-50 p-4 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-          <div className="flex items-center gap-3">
-            <span className="w-3 h-3 bg-amber-500 border border-neutral-900 shrink-0"></span>
+        <div className="free-tier-notice">
+          <div className="free-tier-notice__content">
+            <span className="free-tier-notice__dot"></span>
             <div>
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 block">
+              <span className="free-tier-notice__label">
                 MODE MONEY TRACKER AKTIF
               </span>
-              <span className="text-xs text-neutral-600 font-sans">
+              <span className="free-tier-notice__desc">
                 Aplikasi berjalan dalam mode pencatat pengeluaran. Buka kalkulator Safe-to-Spend adaptif, analisis 50/30/20, dan rekomendasi sewa kost dengan upgrade.
               </span>
             </div>
@@ -248,9 +249,9 @@ export const DashboardPage: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate('/subscription')}
-            className="px-3.5 py-1.5 font-mono font-bold text-xs uppercase bg-neutral-900 text-white hover:bg-neutral-800 transition shrink-0"
+            className="pill dark"
           >
-            Upgrade ke Advisor (Rp 29.900) →
+            <span className="inline-flex items-center gap-1.5">Upgrade ke Advisor (Rp 29.900) <Icon name="arrowRight" size={13} /></span>
           </button>
         </div>
       )}
@@ -271,30 +272,29 @@ export const DashboardPage: React.FC = () => {
             className="tag-btn"
             onClick={() => navigate('/onboarding')}
           >
-            ⚙ EDIT PROFIL & GAJI
+            <Icon name="settings" size={14} /> EDIT PROFIL & GAJI
           </button>
           <button
             type="button"
             className="tag-btn active"
             onClick={() => navigate('/alokasi')}
           >
-            ⇄ ALOKASI 50/30/20 {!isPremium && <small style={{ color: '#d97706' }}>🔒 PRO</small>}
+            <Icon name="swap" size={14} /> ALOKASI 50/30/20 {!isPremium && <small className="nav-lock-tag"><Icon name="lock" size={11} /> PRO</small>}
           </button>
           <button
             type="button"
             className="tag-btn"
             onClick={() => navigate('/rekomendasi')}
           >
-            ★ REKOMENDASI GAYA HIDUP {!isPremium && <small style={{ color: '#d97706' }}>🔒 PRO</small>} →
+            <Icon name="star" size={14} /> REKOMENDASI GAYA HIDUP {!isPremium && <small className="nav-lock-tag"><Icon name="lock" size={11} /> PRO</small>} <Icon name="arrowRight" size={14} />
           </button>
           {!isPremium && (
             <button
               type="button"
-              className="tag-btn"
+              className="tag-btn tag-btn--upgrade"
               onClick={() => navigate('/subscription')}
-              style={{ backgroundColor: '#fef3c7', borderColor: '#d97706', color: '#78350f', fontWeight: 'bold' }}
             >
-              ★ UPGRADE ADVISOR
+              <Icon name="star" size={14} /> UPGRADE ADVISOR
             </button>
           )}
         </div>

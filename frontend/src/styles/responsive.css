@@ -30,6 +30,18 @@
   .chart-and-legend-grid {
     grid-template-columns: 1fr;
   }
+
+  .plans-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .plan-card:nth-child(2) {
+    border-right: 0;
+  }
+
+  .sub-gate__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -46,11 +58,12 @@
   .metrics, .feature-grid, .orange-grid, .site-footer { grid-template-columns: 1fr 1fr; }
   .metric:nth-child(2) { border-right: 0; }
   .feature:nth-child(2) { border-right: 0; }
+  .site-footer > div:nth-child(2) { border-right: 0; }
   .feature { min-height: 430px; }
   .features::before { height: 6px; }
   .cta { margin: 20px; padding: 35px; }
   .cta form { flex-direction: column; align-items: stretch; min-width: 0; }
-  .cta button { width: 100%; }
+  .cta-actions { flex-direction: column; }
 }
 
 /* --------------------------------------------------------------------------
@@ -77,14 +90,22 @@
 
   /* Compact, clean mobile topbar */
   .fatrack-topbar {
-    padding: 0 16px;
-    height: 56px;
-    flex-direction: row;
+    padding: 8px 12px;
+    min-height: 56px;
+    height: auto;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     position: sticky;
     top: 0;
     z-index: 50;
+  }
+
+  .fatrack-topbar .brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: 7px;
   }
 
   .fatrack-topbar .brand-sub,
@@ -92,20 +113,41 @@
     display: none;
   }
 
+  .fatrack-topbar .avatar {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    font-size: 11px;
+  }
+
   .topbar-right {
-    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    justify-content: space-between;
+    gap: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .topbar-right > a,
+  .logout-btn {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
   }
 
   .user-greeting {
+    flex: 1 1 auto;
+    min-width: 0;
     font-size: 10px;
-    max-width: 110px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .logout-btn {
-    padding: 5px 10px;
+    padding: 6px 10px;
     font-size: 9px;
   }
 
@@ -584,10 +626,18 @@
   .terminal-head > span:last-child { max-width: 38%; }
   .terminal-body { padding: 16px; min-width: 0; }
   .worth strong { font-size: 27px; overflow-wrap: anywhere; }
-  section.orange h2, .cta h2 { font-size: clamp(34px, 11vw, 48px); }
+  .cta-actions { flex-direction: column; }
   .cta { margin: 18px; padding: 25px; }
   .cta form { gap: 16px; }
   .site-footer > div { border-right: 0; border-bottom: 1px solid #111; }
+
+  .plans-grid { grid-template-columns: 1fr; }
+  .plan-card { border-right: 0; }
+  .sub-gate { padding: 24px; }
+  .sub-gate__compare { grid-template-columns: 1fr; }
+  .subscription-page { padding: 24px; }
+  .subscription-header { flex-direction: column; align-items: flex-start; }
+  .free-tier-notice { flex-direction: column; align-items: flex-start; }
 }
 
 /* --------------------------------------------------------------------------

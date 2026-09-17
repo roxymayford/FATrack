@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Icon } from '../components/Icon';
 import { useAuth } from '../contexts/AuthContext';
 import { CurrencyInput } from '../components/CurrencyInput';
 import { getProfile, upsertProfile } from '../lib/storage';
@@ -95,7 +96,7 @@ export const OnboardingPage: React.FC = () => {
           <span>SETUP PROFIL KEUANGAN</span>
         </div>
         <button type="button" className="nav-link" onClick={() => navigate('/dashboard')}>
-          LEWATI KE DASHBOARD →
+          <span className="inline-flex items-center gap-1.5">LEWATI KE DASHBOARD <Icon name="arrowRight" size={14} /></span>
         </button>
       </header>
 
@@ -220,7 +221,7 @@ export const OnboardingPage: React.FC = () => {
             </div>
 
             <button type="submit" className="pill dark submit-setup-btn" disabled={isSaving}>
-              {isSaving ? 'MENYIMPAN STRUKTUR...' : 'SIMPAN & AKTIFKAN DASHBOARD →'}
+              {isSaving ? 'MENYIMPAN STRUKTUR...' : <span className="inline-flex items-center gap-1.5">SIMPAN & AKTIFKAN DASHBOARD <Icon name="arrowRight" size={14} /></span>}
             </button>
           </div>
 

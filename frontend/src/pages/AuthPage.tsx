@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { Icon } from '../components/Icon';
 
 export const AuthPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +14,7 @@ export const AuthPage: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { login, register, loginDemo, user } = useAuth();
+  const { login, register, loginDemo, loginWithGoogle, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,6 +56,17 @@ export const AuthPage: React.FC = () => {
     navigate('/dashboard');
   };
 
+  const handleGoogle = async () => {
+    setErrorMsg(null);
+    setIsSubmitting(true);
+    const res = await loginWithGoogle();
+    if (res.error) {
+      setErrorMsg(res.error);
+      setIsSubmitting(false);
+    }
+    // On success with real Supabase, OAuth redirect occurs; demo mode falls through to dashboard via user effect
+  };
+
   return (
     <main className="auth-page">
       <section className="auth-panel">
@@ -78,7 +90,7 @@ export const AuthPage: React.FC = () => {
 
           {errorMsg && (
             <div className="auth-error-box">
-              ⚠ {errorMsg}
+              <Icon name="alert" size={16} /> {errorMsg}
             </div>
           )}
 
@@ -123,10 +135,29 @@ export const AuthPage: React.FC = () => {
               {isSubmitting
                 ? 'MEMPROSES...'
                 : mode === 'register'
-                ? 'DAFTAR & SETUP PROFIL →'
-                : 'MASUK KE DASHBOARD →'}
+                ? <span className="inline-flex items-center gap-1.5">DAFTAR & SETUP PROFIL <Icon name="arrowRight" size={14} /></span>
+                : <span className="inline-flex items-center gap-1.5">MASUK KE DASHBOARD <Icon name="arrowRight" size={14} /></span>}
             </button>
           </form>
+
+          <div className="auth-or-divider">
+            <span>ATAU</span>
+          </div>
+
+          <button
+            type="button"
+            className="auth-google-btn"
+            onClick={handleGoogle}
+            disabled={isSubmitting}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.8 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.5a4.7 4.7 0 0 1-2 3.1v2.6h3.3a10 10 0 0 0 3-7.7Z" fill="#4285F4" />
+              <path d="M12 22c2.7 0 5-.9 6.7-2.5l-3.3-2.6c-.9.6-2 .9-3.4.9a5.9 5.9 0 0 1-5.5-4H3.1v2.7A10 10 0 0 0 12 22Z" fill="#34A853" />
+              <path d="M6.5 13.8a6 6 0 0 1 0-3.6V7.5H3.1a10 10 0 0 0 0 9l3.4-2.7Z" fill="#FBBC05" />
+              <path d="M12 6.2c1.5 0 2.8.5 3.8 1.5l2.9-2.9A9.8 9.8 0 0 0 12 2 10 10 0 0 0 3.1 7.5l3.4 2.7A5.9 5.9 0 0 1 12 6.2Z" fill="#EA4335" />
+            </svg>
+            <span>{mode === 'register' ? 'DAFTAR DENGAN GOOGLE' : 'MASUK DENGAN GOOGLE'}</span>
+          </button>
 
           <div className="auth-demo-divider">
             <button
@@ -134,7 +165,7 @@ export const AuthPage: React.FC = () => {
               className="pill dark auth-demo-btn"
               onClick={handleDemo}
             >
-              COBA INSTAN DENGAN DEMO MODE →
+              <span className="inline-flex items-center gap-1.5">COBA INSTAN DENGAN DEMO MODE <Icon name="arrowRight" size={14} /></span>
             </button>
           </div>
 
